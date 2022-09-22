@@ -1,0 +1,96 @@
+<div class="container mt-5">
+    <div class="card">
+        <div class="d-flex justify-content-between p-3">
+            <div class="image">
+
+                <!-- ../../assets/images/quizNav.png-->
+                <img src="../../assets/images/logo.png" alt="" width="50">
+            </div>
+            <div class="quiz-header">
+                <h4 style="font-family: cursive;">World Quiz competition</h4>
+                <span style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; color: rgba(163, 10, 21, 0.966);">[welcome - {{name}}]</span>
+
+            </div>
+        </div>
+        <!--//this ng-container for question part-->
+        <ng-container *ngIf="!isQuizCompleted">
+
+            <div class="d-flex justify-content-around py-3">
+                <div class="score">
+
+                    <h5>{{points}} points</h5>
+                </div>
+                <div class="question-remain">
+                    <!--we are using currentQuestion+1 for changing the question will 
+                change and questionList of total lenght of array of question-->
+                    <span style="font-style: italic;">Question {{currentQuestion+1}} of {{questionList.length}}</span>
+
+                </div>
+
+                <div class="timer ">
+                   <h5 i class="fa fa-clock-o py-1" aria-hidden="true">{{counter}} sec</h5>
+                </div>
+
+            </div>
+            <div class="progress mb-3">
+                <!--this  [ngStyle]="{'width':progress+'%' line for dynamic progress bar incresses according increasse the questions -->
+                <div class="progress-bar progress-bar-striped bg-success" role="progressbar"
+                    [ngStyle]="{'width':progress+'%'}" aria-label="Success striped example" style="width: 25%"
+                    aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                </div>
+            </div>
+            <div class="question">
+                <div class="card">
+                    <h4> {{questionList[currentQuestion]?.questionText}}</h4>
+                </div>
+            </div>
+            <!-- we are working on answer ,we use loop,and fetching answer 
+        from Questio.json[and options is the array]-->
+            <div class="options">
+                <ol *ngFor="let option of questionList[currentQuestion]?.options">
+
+                    <li (click)="answer(currentQuestion+1,option)">
+                        <div appChangeBg [isCorrect]="option.correct" class="card">
+                            {{option.text}}
+                        </div>
+                    </li>
+
+                </ol>
+
+
+            </div>
+            <div class="d-flex justify-content-between">
+
+                <!-- after clicking that question will change (see in questioncomponent we call method 
+            on click)-->
+
+                <!--we disabled to go question no 1 to zero-->
+                <button [disabled]="currentQuestion===0" class="btn" (click)="previousQuestion()"><i
+                        class="fa text-primary fa-chevron-left fa-3x" aria-hidden="true  "></i></button>
+                <button class="btn" (click)="restQuiz()"><i class="fa fa-refresh text-primary fa-3x"
+                        aria-hidden="true"></i></button>
+                <button class="btn" (click)="nextQuestion()"><i class="fa text-primary fa-chevron-right fa-3x"
+                        aria-hidden="true  "></i></button>
+
+            </div>
+        </ng-container>
+
+        <!--//this ng-container for result part-->
+        <ng-container *ngIf="isQuizCompleted">
+            <div class="row d-flex justify-content-between">
+
+                <img style="width:50%;" class="img-fluid col sm-12 mx-auto" src="../../assets/images/result.png" alt="">
+                <div class="result text-center col-md-6 col-sm-12">
+                    <h3>Congratulation!! <br>you have completed the quiz<br>Below is your result:</h3>
+                        <p>Total Question Attmepted:{{questionList.length}}</p>
+                    <p>Total Correct Answer:{{correctAnswer}}</p>
+                    <p>Total Wrong Answer:{{incorrectAnswer}}</p>
+                    <p>Total Points:{{points}}</p>
+                </div>
+
+            </div>
+        </ng-container>
+
+    </div>
+
+</div>

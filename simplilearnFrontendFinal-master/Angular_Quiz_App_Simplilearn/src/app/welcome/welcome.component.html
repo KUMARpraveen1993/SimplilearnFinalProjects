@@ -1,0 +1,32 @@
+
+<div class=" container-fluid bg-light py-2 " style="color: rgb(155, 70, 82);">
+    <h1 class="display-9 fw-light "> Welcome to <span>Simplilearn Quiz World!</span> </h1>
+
+    <p class="  col-md-90 fw-light"></p>
+
+    <h4>Rules:</h4>
+    <ol>
+        <li>Correct Question Gives You 10 Points.</li>
+        <li>Incorect Answer Negative 10 point.</li>
+        <li>You Will Have 60 sec to answer each Question.</li>
+        <li>Refreshing the page restart the Rules.</li>
+    </ol>
+    <h2 style="font-family: cursive;text-align: center;"></h2>
+    <div class="name col-md-4 my-3">
+        <label for="">Enter Your Name:</label>
+        <input #name type="text" class="form-control py-2">
+        <br>
+
+
+        <!-- i made one method startQuiz() in welcomeComponent.ts and import ViewChild,ElementRef this two .
+    and make this  @ViewChild('name' )nameKey!: ElementRef;
+     this is the method under welcomeComponent.ts[ startQuiz(){
+    localStorage.setItem("name",this.nameKey.nativeElement.value);
+  }]  [The box data ]-->
+
+        <button class="btn btn-primary btn-lg py-1 " routerLink="/question" (click)="startQuiz()">
+            Start your
+            Quiz</button>
+
+    </div>
+</div>
